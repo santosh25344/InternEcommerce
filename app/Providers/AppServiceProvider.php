@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+
+use function PHPSTORM_META\map;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+      Model::unguard();
     }
 }
