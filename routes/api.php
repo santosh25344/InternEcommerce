@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -9,4 +10,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/customer',[CustomerController::class,'store']);
+Route::get('/categories',[ApiController::class,'categories']);
