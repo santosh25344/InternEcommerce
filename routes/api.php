@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Models\Customer;
@@ -11,7 +12,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/client', [ClientController::class, 'create']);
+Route::post('/client', [ClientController::class, 'create_client']);
+Route::post('/category', [CategoryController::class, 'create_category']);
 
 Route::get('/categories',[ApiController::class,'categories']);
 Route::get('/category/{slug}',[ApiController::class,'category']);

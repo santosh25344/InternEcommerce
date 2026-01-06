@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function create(Request $request)
+    public function create_client(Request $request)
     {
         // return response()->json($request);
         $client = new Client();
