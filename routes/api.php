@@ -13,7 +13,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/client', [ClientController::class, 'create_client']);
-Route::post('/category', [CategoryController::class, 'create_category']);
+Route::get('/client',[ClientController::class,'index']);
 
-Route::get('/categories',[ApiController::class,'categories']);
-Route::get('/category/{slug}',[ApiController::class,'category']);
+
+Route::post('/category', [CategoryController::class, 'create_category']);
+Route::get('/category', [CategoryController::class, 'index']);
+
+// Route::get('/categories',[ApiController::class,'categories']);
+// Route::get('/category/{slug}',[ApiController::class,'category']);

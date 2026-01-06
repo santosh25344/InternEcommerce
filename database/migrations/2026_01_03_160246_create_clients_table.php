@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('contact');
             $table->string('email')->unique();
             $table->string('password')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('logo')->nullable();
             $table->string('status')->default('pending');
             $table->date('expire_date')->nullable()->change();
