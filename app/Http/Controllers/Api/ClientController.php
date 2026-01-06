@@ -10,7 +10,7 @@ class ClientController extends Controller
 {
     public function create(Request $request)
     {
-        return response()->json($request);
+        // return response()->json($request);
         $client = new Client();
         $client->name = $request->name;
         $client->shop_name = $request->shop_name;
@@ -20,7 +20,7 @@ class ClientController extends Controller
         $client->address = $request->address;
         $client->logo = $request->logo;
         $client->status = $request->status;
-        $client->expire_date = $request->expire_date;
+        $client->expire_date = $request->expire_date ?: null;
         $client->save();
         return response()->json($client);
         // return $client;

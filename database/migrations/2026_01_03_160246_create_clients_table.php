@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('logo')->nullable();
             $table->string('status')->default('pending');
-            $table->string('expire_date')->nullable();
+            $table->date('expire_date')->nullable()->change();
             $table->timestamps();
         });
     }
