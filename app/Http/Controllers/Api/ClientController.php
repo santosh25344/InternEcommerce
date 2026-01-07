@@ -45,9 +45,15 @@ class ClientController extends Controller
         $client->email = $request->email;
         $client->password = $request->password;
         $client->address = $request->address;
-        $client->logo = $request->logo;
+        $logo = $request->logo;
         $client->status = $request->status;
         $client->expire_date = $request->expire_date ?: null;
+        if($logo)
+        {
+            $file_name = time().'.'.$logo->getClientOriginalExtension();
+            $logo->move('images', $file_name);
+            $client->logo = 'images/'.$file_name;
+        }
         $client->save();
         // return response()->json($client);
         return response()->json([
@@ -99,9 +105,15 @@ class ClientController extends Controller
         $client->email = $request->email;
         $client->password = $request->password;
         $client->address = $request->address;
-        $client->logo = $request->logo;
+        $logo = $request->logo;
         $client->status = $request->status;
         $client->expire_date = $request->expire_date ?: null;
+        if($logo)
+        {
+            $file_name = time().'.'.$logo->getClientOriginalExtension();
+            $logo->move('images', $file_name);
+            $client->logo = 'images/'.$file_name;
+        }
         $client->save();
         // return response()->json($client);
         return response()->json([
