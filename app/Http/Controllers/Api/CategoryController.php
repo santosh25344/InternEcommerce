@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -48,7 +49,12 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'slug' => 'required|string|max:255|unique:categories,slug',
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories')->ignore($id),
+            ],
         ]);
 
         if($validator->fails()){
@@ -74,7 +80,7 @@ class CategoryController extends Controller
         // return response()->json($category);
         return response()->json([
             'Status' => 'Success',
-            'message' => 'Category created successfully'
+            'message' => 'Category updated successfully'
         ]);
     }
 

@@ -7,6 +7,7 @@ use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ClientController extends Controller
 {
@@ -61,7 +62,13 @@ class ClientController extends Controller
             'name' => 'required|string|max:255',
             'shop_name' => 'required|string|max:255',
             'contact' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255|unique:clients,email',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('clients')->ignore($id),
+            ],
             'password' => 'nullable|string|min:6',
             'address' => 'nullable|string',
             'logo' => 'nullable|string',
