@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
@@ -26,7 +25,7 @@ class ClientController extends Controller
             'email' => 'required|string|email|max:255|unique:clients,email',
             'password' => 'nullable|string|min:6',
             'address' => 'nullable|string',
-            'logo' => 'nullable|string',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'status' => 'required|boolean',
             'expire_date' => 'nullable|date',
         ]);
@@ -77,7 +76,7 @@ class ClientController extends Controller
             ],
             'password' => 'nullable|string|min:6',
             'address' => 'nullable|string',
-            'logo' => 'nullable|string',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'status' => 'required|boolean',
             'expire_date' => 'nullable|date',
         ]);
