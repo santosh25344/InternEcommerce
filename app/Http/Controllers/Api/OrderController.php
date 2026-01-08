@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,9 @@ class OrderController extends Controller
             ], 404);
         }
 
-        return response()->json($orders);
+        return OrderResource::collection($orders);
+
+        // return response()->json($orders);
     }
 
     public function create_order(Request $request)
