@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,7 @@ Route::get('/order', [OrderController::class, 'index']);
 Route::patch('/order/{id}', [OrderController::class, 'update_order']);
 Route::delete('/order/{id}', [OrderController::class, 'delete_order']);
 
-// Route::get('/categories',[ApiController::class,'categories']);
-// Route::get('/category/{slug}',[ApiController::class,'category']);
+Route::post('/product',[ProductController::class,'create_product']);
+Route::get('/product',[ProductController::class,'index']);
+Route::patch('/product/{id}',[ProductController::class,'update_product']);
+Route::delete('/product/{id}',[ProductController::class,'delete_product']);
