@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\OrderController;
@@ -37,3 +38,8 @@ Route::post('/payment', [PaymentController::class, 'process_payment']);
 Route::get('/payment', [PaymentController::class, 'index']);
 Route::patch('/payment/{id}', [PaymentController::class, 'edit_payment']);
 Route::delete('/payment/{id}', [PaymentController::class, 'delete_payment']);
+
+Route::post('/cart', [CartController::class, 'add_to_cart']);
+Route::get('/cart', [CartController::class, 'index']);
+Route::patch('/cart/{id}', [CartController::class, 'update_cart']);
+Route::delete('/cart/{id}', [CartController::class, 'delete_cart']);
