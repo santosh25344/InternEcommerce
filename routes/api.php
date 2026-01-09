@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,5 @@ Route::post('/cart', [CartController::class, 'add_to_cart']);
 Route::get('/cart', [CartController::class, 'index']);
 Route::patch('/cart/{id}', [CartController::class, 'update_cart']);
 Route::delete('/cart/{id}', [CartController::class, 'delete_cart']);
+
+Route::post('/user', [AuthController::class, 'register_user']);
