@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,8 @@ Route::post('/product',[ProductController::class,'create_product']);
 Route::get('/product',[ProductController::class,'index']);
 Route::patch('/product/{id}',[ProductController::class,'update_product']);
 Route::delete('/product/{id}',[ProductController::class,'delete_product']);
+
+Route::post('/payment', [PaymentController::class, 'process_payment']);
+Route::get('/payment', [PaymentController::class, 'index']);
+Route::patch('/payment/{id}', [PaymentController::class, 'edit_payment']);
+Route::delete('/payment/{id}', [PaymentController::class, 'delete_payment']);
