@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -12,6 +13,9 @@ class ClientController extends Controller
 {
     public function index()
     {
+        // $user = Auth::user(); // Get the authenticated user
+        // $user = auth()->user(); // Alternative way to get the authenticated user
+
         $clients = Client::all();
         return ClientResource::collection($clients);
     }

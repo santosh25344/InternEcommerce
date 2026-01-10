@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,8 +32,11 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+
+        $token = $user->createToken('auth_token')->plainTextToken; // Create token for user
         return response()->json([
             'status' => 'Success',
+            'token' => $token,
             'message' => 'User registered successfully',
         ]);
     }
@@ -58,7 +62,7 @@ class AuthController extends Controller
         {
             return response()->json([
                 'status' => 'Failed',
-                'token' => 'Null',
+                'token' => null,
                 'message' => 'Invalid login credentials',
             ]);
         }
@@ -70,4 +74,25 @@ class AuthController extends Controller
             'message' => 'User logged in successfully',
         ]);
     }
+
+    public function logout_user(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete(); // Revoke all tokens for the user
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'User logged out successfully',
+        ]);
+    }
+
+    // public function logout_user() //Alternative method
+    // {
+    //     $user = User::find(Auth::user()->id);
+    //     $user->tokens()->delete(); // Revoke all tokens for the user
+    //     return response()->json([
+    //         'status' => 'Success',
+    //         'message' => 'User logged out successfully',
+    //     ]);
+    // }
 }
