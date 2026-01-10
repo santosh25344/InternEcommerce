@@ -46,3 +46,4 @@ Route::patch('/cart/{id}', [CartController::class, 'update_cart']);
 Route::delete('/cart/{id}', [CartController::class, 'delete_cart']);
 
 Route::post('/user', [AuthController::class, 'register_user']);
+Route::post('/login', [AuthController::class, 'login_user']);
