@@ -13,14 +13,6 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
-        if($user->role !== 'admin')
-        {
-            return response()->json([
-                'status' => 'Failed',
-                'message' => 'You are not authorized',
-            ]);
-        }
         $categories = Category::all();
         return CategoryResource::collection($categories);
     }

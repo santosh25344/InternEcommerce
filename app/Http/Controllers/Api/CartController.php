@@ -12,14 +12,6 @@ class CartController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
-        if($user->role !== 'admin')
-        {
-            return response()->json([
-                'status' => 'Failed',
-                'message' => 'You are not authorized',
-            ]);
-        }
         $carts = Cart::all();
         return CartResource::collection($carts);
     }
@@ -90,15 +82,6 @@ class CartController extends Controller
             return response()->json([
                 'status' => 'Failed',
                 'message' => 'Invalid request',
-            ]);
-        }
-
-        $user = auth()->user();
-        if($user !== 'admin')
-        {
-            return response()->json([
-                'status' => 'Failed',
-                'message' => 'You are not authorized',
             ]);
         }
 
