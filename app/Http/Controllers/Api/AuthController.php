@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -97,4 +98,56 @@ class AuthController extends Controller
     //         'message' => 'User logged out successfully',
     //     ]);
     // }
+
+    public function update_user(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                Rule::unique('users','email')->ignore($id)],
+            'password' => 'required|string|min:8',
+            'role' => 'nullable|string',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'User updated successfully',
+        ]);
+    }
+
+    public function delete_user($id)
+    {
+        $user = User::find($id);
+        if(!$user)
+        {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'User not found',
+            ]);
+        }
+
+        $user->delete();
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'User deleted successfully',
+        ]);
+    }
 }

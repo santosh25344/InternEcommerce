@@ -49,6 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {   //Grouping routes that 
 
     Route::post('/logout', [AuthController::class, 'logout_user']);
     Route::post('/user', [AuthController::class, 'register_user']);
+    Route::patch('/user/{id}', [AuthController::class, 'update_user'])->middleware('admin');
+    Route::delete('/user/{id}', [AuthController::class, 'delete_user'])->middleware('admin');
     });
 
 Route::post('/login', [AuthController::class, 'login_user']);
