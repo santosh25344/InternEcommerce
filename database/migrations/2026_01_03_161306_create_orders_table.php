@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        if(!Schema::hasTable('orders')) {
+            Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignid('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignid('client_id')->nullable()->constrained()->cascadeOnDelete();
@@ -19,7 +20,8 @@ return new class extends Migration
             $table->string('status');
             $table->string('delivery_address')->nullable();
             $table->timestamps();
-        });
+            });
+        }
     }
 
     /**

@@ -47,9 +47,8 @@ Route::middleware('auth:sanctum')->group(function () {   //Grouping routes that 
     Route::patch('/cart/{id}', [CartController::class, 'update_cart']);
     Route::delete('/cart/{id}', [CartController::class, 'delete_cart']);
 
-    Route::post('/user', [AuthController::class, 'register_user']);
-    Route::post('/logout', [AuthController::class, 'logout_user']);
+    });
 
-});
-
+Route::post('/logout', [AuthController::class, 'logout_user']);
+Route::post('/user', [AuthController::class, 'register_user']);
 Route::post('/login', [AuthController::class, 'login_user']);

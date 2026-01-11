@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        if(!Schema::hasTable('clients')) {
+            Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('shop_name');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->date('expire_date')->nullable()->change();
             $table->timestamps();
         });
+        }
     }
 
     /**
