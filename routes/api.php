@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProductController;
@@ -17,10 +17,10 @@ Route::get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {   //Grouping routes that require authentication
 
-    Route::post('/company', [ClientController::class, 'create_company']);
-    Route::get('/company',[ClientController::class,'index'])->middleware('admin');
-    Route::patch('/company/{id}',[ClientController::class,'update_company'])->middleware('admin');
-    Route::delete('/company/{id}',[ClientController::class,'delete_company'])->middleware('admin');
+    Route::post('/company', [CompanyController::class, 'create_company']);
+    Route::get('/company',[CompanyController::class,'index'])->middleware('admin');
+    Route::patch('/company/{id}',[CompanyController::class,'update_company'])->middleware('admin');
+    Route::delete('/company/{id}',[CompanyController::class,'delete_company'])->middleware('admin');
 
     Route::post('/category', [CategoryController::class, 'create_category']);
     Route::get('/category', [CategoryController::class, 'index'])->middleware('admin');

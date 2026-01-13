@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class ClientController extends Controller
+class CompanyController extends Controller
 {
     public function index()
     {
