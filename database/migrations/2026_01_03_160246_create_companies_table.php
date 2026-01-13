@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('clients')) {
-            Schema::create('clients', function (Blueprint $table) {
+        if(!Schema::hasTable('companies')) {
+            Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('shop_name');
+            $table->string('owner_name');
+            $table->string('company_name');
             $table->string('contact');
             $table->string('email')->unique();
             $table->string('password')->nullable();
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('status')->default('pending');
             $table->date('expire_date')->nullable()->change();
+            $table->longText('play_store_link')->nullable();
+            $table->longText('app_store_link')->nullable();
             $table->timestamps();
         });
         }
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('companies');
     }
 };

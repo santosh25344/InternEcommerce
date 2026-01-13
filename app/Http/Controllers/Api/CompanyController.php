@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ClientResource;
-use App\Models\Client;
+use App\Http\Resources\CompanyResource;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,22 +16,24 @@ class ClientController extends Controller
         // $user = Auth::user(); // Get the authenticated user
         // $user = auth()->user(); // Alternative way to get the authenticated user
 
-        $clients = Client::all();
-        return ClientResource::collection($clients);
+        $companies = Company::all();
+        return CompanyResource::collection($companies);
     }
 
-    public function create_client(Request $request)
+    public function create_company(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'shop_name' => 'required|string|max:255',
+            'owner_name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
             'contact' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255|unique:clients,email',
+            'email' => 'required|string|email|max:255|unique:companies,email',
             'password' => 'nullable|string|min:6',
             'address' => 'nullable|string',
             'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'status' => 'required|boolean',
             'expire_date' => 'nullable|date',
+            'play_store_link' => 'nullable|url',
+            'app_store_link' => 'nullable|url',
         ]);
 
         if($validator->fails()){
@@ -41,48 +43,52 @@ class ClientController extends Controller
             ], 422);
         }
 
-        $client = new Client();
-        $client->name = $request->name;
-        $client->shop_name = $request->shop_name;
-        $client->contact = $request->contact;
-        $client->email = $request->email;
-        $client->password = $request->password;
-        $client->address = $request->address;
+        $company = new Company();
+        $company->owner_name = $request->owner_name;
+        $company->company_name = $request->company_name;
+        $company->contact = $request->contact;
+        $company->email = $request->email;
+        $company->password = $request->password;
+        $company->address = $request->address;
         $logo = $request->logo;
-        $client->status = $request->status;
-        $client->expire_date = $request->expire_date ?: null;
+        $company->status = $request->status;
+        $company->expire_date = $request->expire_date ?: null;
+        $company->play_store_link = $request->play_store_link;
+        $company->app_store_link = $request->app_store_link;
         if($logo)
         {
             $file_name = time().'.'.$logo->getClientOriginalExtension();
             $logo->move('images', $file_name);
-            $client->logo = 'images/'.$file_name;
+            $company->logo = 'images/'.$file_name;
         }
-        $client->save();
-        // return response()->json($client);
+        $company->save();
+        // return response()->json($company);
         return response()->json([
             'Status' => 'Success',
-            'message' => 'Client created successfully'
+            'message' => 'Company created successfully'
         ]);
     }
 
-    public function update_client(Request $request, $id)
+    public function update_company(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'shop_name' => 'required|string|max:255',
+            'owner_name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
             'contact' => 'required|string|max:20',
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('clients')->ignore($id),
+                Rule::unique('companies')->ignore($id),
             ],
             'password' => 'nullable|string|min:6',
             'address' => 'nullable|string',
             'logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'status' => 'required|boolean',
             'expire_date' => 'nullable|date',
+            'play_store_link' => 'nullable|url',
+            'app_store_link' => 'nullable|url',
         ]);
 
         if($validator->fails()){
@@ -92,8 +98,8 @@ class ClientController extends Controller
             ], 422);
         }
 
-        $client = Client::find($id);
-        if(!$client)
+        $company = Company::find($id);
+        if(!$company)
         {
             return response()->json([
                 'status' => 'Failed',
@@ -101,34 +107,35 @@ class ClientController extends Controller
             ], 404);
         }
 
-        $client = Client::find($id);
-        $client->name = $request->name;
-        $client->shop_name = $request->shop_name;
-        $client->contact = $request->contact;
-        $client->email = $request->email;
-        $client->password = $request->password;
-        $client->address = $request->address;
+        $company->owner_name = $request->owner_name;
+        $company->company_name = $request->company_name;
+        $company->contact = $request->contact;
+        $company->email = $request->email;
+        $company->password = $request->password;
+        $company->address = $request->address;
         $logo = $request->logo;
-        $client->status = $request->status;
-        $client->expire_date = $request->expire_date ?: null;
+        $company->status = $request->status;
+        $company->expire_date = $request->expire_date ?: null;
+        $company->play_store_link = $request->play_store_link;
+        $company->app_store_link = $request->app_store_link;
         if($logo)
         {
             $file_name = time().'.'.$logo->getClientOriginalExtension();
             $logo->move('images', $file_name);
-            $client->logo = 'images/'.$file_name;
+            $company->logo = 'images/'.$file_name;
         }
-        $client->save();
-        // return response()->json($client);
+        $company->save();
+        // return response()->json($company);
         return response()->json([
             'Status' => 'Success',
-            'message' => 'Client updated successfully'
+            'message' => 'Company updated successfully'
         ]);
     }
 
-    public function delete_client($id)
+    public function delete_company($id)
     {
-        $client = Client::find($id);
-        if(!$client)
+        $company = Company::find($id);
+        if(!$company)
         {
             return response()->json([
                 'status' => 'Failed',
@@ -136,10 +143,10 @@ class ClientController extends Controller
             ], 404);
         }
 
-        $client->delete();
+        $company->delete();
         return response()->json([
             'Status' => 'Success',
-            'message' => 'Client deleted successfully'
+            'message' => 'Company deleted successfully'
         ]);
     }
 

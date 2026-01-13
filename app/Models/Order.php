@@ -11,9 +11,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function client()
+    public function company()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function payment()

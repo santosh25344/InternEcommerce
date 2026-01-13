@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Admin;
-use App\Models\Client;
+use App\Models\Company;
 
 return [
 
@@ -50,9 +50,9 @@ return [
             'provider' => 'admins',
         ],
 
-        'client' => [
+        'company' => [
             'driver' => 'session',
-            'provider' => 'clients',
+            'provider' => 'companies',
         ],
     ],
 
@@ -84,11 +84,11 @@ return [
             'model' => env('AUTH_MODEL',Admin::class),
         ],
 
-        'clients' => [
+        'companies' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL',Client::class),
+            'model' => env('AUTH_MODEL',Company::class),
         ],
-        
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

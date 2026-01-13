@@ -17,10 +17,10 @@ Route::get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {   //Grouping routes that require authentication
 
-    Route::post('/client', [ClientController::class, 'create_client']);
-    Route::get('/client',[ClientController::class,'index'])->middleware('admin');
-    Route::patch('/client/{id}',[ClientController::class,'update_client'])->middleware('admin');
-    Route::delete('/client/{id}',[ClientController::class,'delete_client'])->middleware('admin');
+    Route::post('/company', [ClientController::class, 'create_company']);
+    Route::get('/company',[ClientController::class,'index'])->middleware('admin');
+    Route::patch('/company/{id}',[ClientController::class,'update_company'])->middleware('admin');
+    Route::delete('/company/{id}',[ClientController::class,'delete_company'])->middleware('admin');
 
     Route::post('/category', [CategoryController::class, 'create_category']);
     Route::get('/category', [CategoryController::class, 'index'])->middleware('admin');
