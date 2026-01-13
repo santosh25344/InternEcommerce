@@ -28,8 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->authguard('admin')
-            ->registration()
+            ->authGuard('admin')
+            // ->registration()
+            ->brandName('ShopStack Admin Panel')
             ->colors([
                 'primary' => Color::Amber,
             ])

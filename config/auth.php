@@ -88,6 +88,7 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL',Client::class),
         ],
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

@@ -27,7 +27,7 @@ class ClientPanelProvider extends PanelProvider
             ->id('client')
             ->path('client')
             ->login()
-            ->registration(0)
+            ->registration()
             ->authGuard('client')
             ->colors([
                 'primary' => Color::Amber,
