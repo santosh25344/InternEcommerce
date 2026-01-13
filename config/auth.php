@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\Client;
 
 return [
 
@@ -48,6 +49,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'clients',
+        ],
     ],
 
     /*
@@ -78,6 +84,10 @@ return [
             'model' => env('AUTH_MODEL',Admin::class),
         ],
 
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL',Client::class),
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
