@@ -12,13 +12,16 @@ class CategoryForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
+                TextInput::make('category_name')
                     ->required(),
                 Textarea::make('slug')
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('parentID')
+                Textarea::make('description')
                     ->required()
+                    ->columnSpanFull(),
+                TextInput::make('parentID')
+                    ->nullable()
                     ->numeric(),
             ]);
     }
