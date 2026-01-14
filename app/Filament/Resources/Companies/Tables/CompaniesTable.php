@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Companies\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -25,8 +26,7 @@ class CompaniesTable
                     ->searchable(),
                 TextColumn::make('address')
                     ->searchable(),
-                TextColumn::make('logo')
-                    ->searchable(),
+                ImageColumn::make('logo'),
                 TextColumn::make('status')
                     ->searchable(),
                 TextColumn::make('expire_date')
