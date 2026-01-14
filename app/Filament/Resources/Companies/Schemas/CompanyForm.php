@@ -42,12 +42,16 @@ class CompanyForm
                             ->default(null),
                     ]),
 
-                Textarea::make('play_store_link')
-                    ->default(null)
-                    ->columnSpanFull(),
-                Textarea::make('app_store_link')
-                    ->default(null)
-                    ->columnSpanFull(),
+                Section::make('Mobile Apps links')
+                    ->columnSpanFull()
+                    ->schema([
+                        Textarea::make('play_store_link')
+                            ->default(null)
+                            ->columnSpanFull(),
+                        Textarea::make('app_store_link')
+                            ->default(null)
+                            ->columnSpanFull(),
+                    ]),
             ]);
     }
 }
